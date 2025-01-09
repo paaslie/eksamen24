@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<script>
+//Oppgaven tolkes slik at det kun er nødvnedig med program uten brukergrensesnitt
+class Vare {
+// klassen bestemmer at disse attributtene må være tall
+innkjop = 0;
+utsalg = 0;
+antall = 0 ;
+constructor(navn,innkjop,utsalg,antall,utlopsdato){
+this.navn = navn;
+this.innkjop = innkjop;
+this.utsalg=utsalg;
+this.antall=antall;
+this.utlopsdato=utlopsdato;
+}
+
+// denne funksjonen validerer inndataen. Det er ikke tatt hensyn til utløpsdato når det tolkes som valgfri attribut til et objekt.
+validate(navn,innkjop,utsalg,antall,utlopsdato) {
+if(navn.length<1)
+throw new Error("Navnet må være minst to tegn")
+if(innkjop==0)
+throw new Error("Innkjøpsprisen kan ikke være null")
+if(utsalg==0||utsalg<innkjop)
+throw new Error("Er du sikker at utsalgsprisen stemmer")
+if(antall<1)
+throw new Error("Vi er tomme for varen")
+}
+
+// funksjonen vil skrive ut infomasjonen til en webside ved å få inn variabel som parameter
+
+skrivutVare(){
+return(`${this.navn} har utsalgspris ${this.utsalg} kroner og vi har ${this.antall} på lager `)
+}
+
+avanse() {
+    let profitt = (this.utsalg - this.innkjop)
+return((profitt/this.innkjop)*100)
+}
+}
+
+let brannteppe = new Vare("Brannteppe", 50, 100, 15, "12. desember 2025")
+//eksempel på skrive ut en variabel/objekt
+console.log(brannteppe.skrivutVare()) // output: "Brannteppe har utsalgspris 100 kroner og vi har 15 på lager"
+//b
+// gjenbruker variabelen som bruker konstruktøren til å regne ut avansen i prosent
+console.log(brannteppe.avanse()) //output: 100%
+
+
+</script>
+</body>
+</html>
